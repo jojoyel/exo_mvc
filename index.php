@@ -7,6 +7,10 @@ if (isset($_GET["page"]) && !empty($_GET["page"])) {
 
     if ($page == "home") {
         displayHome();
+    } else if ($page == "edit") {
+        displayEdit();
+    } else if ($page == "view") {
+        displayView();
     }
 } else {
     displayHome();
