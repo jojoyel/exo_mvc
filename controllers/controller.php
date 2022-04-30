@@ -12,76 +12,34 @@ function displayEdit(): void
     if (isset($_POST['edit_type'])) {
         $pdo = dbConnection();
 
-        if ($_POST['edit_type'] == "add") {
+        if ($_POST['edit_type'] == "insert") {
             $query = "INSERT INTO `books` (`name`, `author`, `year`, `summary`) VALUES (:name, :author, :year, :summary)";
-            $insertion = $pdo->prepare($query);
+            $preparation = $pdo->prepare($query);
 
-            $insertion->execute([
+            $preparation->execute([
                 "name" => $_POST['name'],
                 "author" => $_POST['author'],
                 "year" => $_POST['year'],
                 "summary" => $_POST['summary']
             ]);
-            if ($insertion->rowCount() > 0) {
-                $result_type = "success";
-                $result = "Livre ajouté";
-            } else {
-                $result_type = "error";
-                $result = "Erreur lors de l'ajout";
-            }
-        } else if ($_POST['edit_type'] == "edit") {
+        } else if ($_POST['edit_type'] == "update") {
             $query = "UPDATE `books` SET `name` = :name, `author` = :author, `year` = :year, `summary` = :summary WHERE `id` = :id";
-            $update = $pdo->prepare($query);
+            $preparation = $pdo->prepare($query);
 
-            $update->execute([
+            $preparation->execute([
                 "name" => $_POST['name'],
                 "author" => $_POST['author'],
                 "year" => $_POST['year'],
                 "summary" => $_POST['summary'],
                 "id" => $_POST['id']
             ]);
-            if ($update->rowCount() > 0) {
-                $result_type = "success";
-                $result = "Livre modifié";
-            } else {
-                $result_type = "error";
-                $result = "Erreur lors de la modification";
-            }
-        } else if ($_POST['edit_type'] == "search") {
-            $query = "SELECT * FROM `books` WHERE `id` LIKE :id";
-            $search = $pdo->prepare($query);
-            $search->execute([
-                "id" => $_POST['id']
-            ]);
-            $search_result = $search->fetch();
-            if ($search->rowCount() > 0) {
-                $result_type = "success";
-                $result = "Livre recherché avec succès";
-                var_dump($search_result);
-                $search_id = $search_result['id'];
-                $search_name = $search_result['name'];
-                $search_author = $search_result['author'];
-                $search_year = $search_result['year'];
-                $search_summary = $search_result['summary'];
-            } else {
-                $result_type = "error";
-                $result = "Recherche infructueuse";
-            }
         } else if ($_POST['edit_type'] == "delete") {
             $query = "DELETE FROM `books` WHERE `id` = :id";
-            $deletion = $pdo->prepare($query);
+            $preparation = $pdo->prepare($query);
 
-            $deletion->execute([
+            $preparation->execute([
                 "id" => $_POST['id']
             ]);
-
-            if ($deletion->rowCount() > 0) {
-                $result_type = "success";
-                $result = "Livre supprimé";
-            } else {
-                $result_type = "error";
-                $result = "Erreur lors de la suppression";
-            }
         }
     }
     require("views/edit.php");
@@ -94,5 +52,5 @@ function displayView(): void
     $books = $pdo->prepare('SELECT * FROM books');
     $books->execute();
     $books = $books->fetchAll();
-    require("views/view.php");
+    require("views/see_all.php");
 }

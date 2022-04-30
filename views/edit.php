@@ -8,21 +8,17 @@
     <title>Edition</title>
 </head>
 <body>
-
-<?php include 'navigations_links.php';
-echo(display_navigation_links(2));
-
-if (isset($result)) {
-    $color = (isset($result_type) && $result_type == "success") ? 'green' : 'red';
-    echo "<p style='background-color:$color;padding:18px'>$result</p>";
-}
-?>
+<ul>
+    <li><a href="http://127.0.0.2/?page=home">Accueil</a></li>
+    <li><a href="http://127.0.0.2/?page=seeall">Consultation</a></li>
+    <li><a href="http://127.0.0.2/?page=edit">Ajouter modifier et supprimer</a></li>
+</ul>
 
 <form action="" method="post">
     <fieldset>
         <legend>Ajouter un livre</legend>
 
-        <input type="hidden" name="edit_type" value="add">
+        <input type="hidden" name="edit_type" value="insert">
         <label for="name">Nom du livre</label>
         <input type="text" id="name" name="name" placeholder="Nom du livre">
         <label for="author">Nom de l'Auteur</label>
@@ -38,31 +34,21 @@ if (isset($result)) {
 <form action="" method="post">
     <fieldset>
         <legend>Modifier un livre</legend>
-        <input type="hidden" name="edit_type" value="search">
-        <label for="id">Id du livre à modifier</label>
-        <input type="number" id="id" name="id" placeholder="Id du livre">
-        <input type="submit" value="Envoyer">
-    </fieldset>
-</form>
-
-<form action="" method="post">
-    <fieldset>
-        <legend>Modifier un livre</legend>
-        <input type="hidden" name="edit_type" value="edit">
+        <input type="hidden" name="edit_type" value="update">
         <label for="id">Id du livre</label>
-        <input type="number" name="id" id="id" <?php if (isset($search_id)) echo "value='$search_id'"; ?>>
+        <input type="number" name="id" id="id">
         <label for="name">Nom du livre</label>
         <input type="text" id="name" name="name"
-               placeholder="Nom du livre" <?php if (isset($search_name)) echo "value='$search_name'" ?>>
+               placeholder="Nom du livre">
         <label for="author">Nom de l'Auteur</label>
         <input type="text" id="author" name="author"
-               placeholder="Auteur" <?php if (isset($search_author)) echo "value='$search_author'" ?>>
+               placeholder="Auteur">
         <label for="year">Année de publication</label>
-        <input type="number" id="year" <?php if (isset($search_year)) echo "value='$search_year'" ?> name="year"
+        <input type="number" id="year" name="year"
                placeholder="Année de publication">
         <label for="summary">Résumé</label>
         <textarea name="summary" id="summary"
-                  placeholder="Sommaire . . ."><?php if (isset($search_summary)) echo "$search_summary" ?></textarea>
+                  placeholder="Sommaire . . ."></textarea>
         <input type="submit" value="Envoyer">
     </fieldset>
 </form>
@@ -70,7 +56,6 @@ if (isset($result)) {
 <form action="" method="post">
     <fieldset>
         <legend>Supprimer un livre</legend>
-
         <input type="hidden" name="edit_type" value="delete">
         <label for="id">ID du livre</label>
         <input type="number" name="id" id="id" placeholder="ID du livre">

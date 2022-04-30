@@ -10,9 +10,10 @@
 <body>
 
 <h1>Accueil</h1>
-
-<?php include 'navigations_links.php';
-echo(display_navigation_links(0)) ?>
-
+<ul>
+    <li><a href="http://127.0.0.2/?page=home">Accueil</a></li>
+    <li><a href="http://127.0.0.2/?page=seeall">Consultation</a></li>
+    <li><a href="http://127.0.0.2/?page=edit">Ajouter modifier et supprimer</a></li>
+</ul>
 </body>
 </html>

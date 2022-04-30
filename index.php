@@ -9,7 +9,7 @@ if (isset($_GET["page"]) && !empty($_GET["page"])) {
         displayHome();
     } else if ($page == "edit") {
         displayEdit();
-    } else if ($page == "view") {
+    } else if ($page == "seeall") {
         displayView();
     }
 } else {
