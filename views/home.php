@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<h1>Accueil</h1>
+
 <?php include 'navigations_links.php';
 echo(display_navigation_links(0)) ?>
 
