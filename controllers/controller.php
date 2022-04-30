@@ -51,6 +51,6 @@ function displayView(): void
 
     $books = $pdo->prepare('SELECT * FROM books');
     $books->execute();
-    $books = $books->fetchAll();
+    $result = $books->fetchAll();
     require("views/see_all.php");
 }
