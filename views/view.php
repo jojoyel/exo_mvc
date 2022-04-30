@@ -34,6 +34,8 @@ echo(display_navigation_links(1)) ?>
             echo '<td>' . htmlspecialchars($book['summary']) . '</td>';
             echo '</tr>';
         }
+    } else {
+        echo '<tr><td colspan="5">Aucun livre trouvé</td></tr>';
     }
     ?>
     </tbody>
