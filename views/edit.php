@@ -48,7 +48,9 @@ if (isset($result)) {
 <form action="" method="post">
     <fieldset>
         <legend>Modifier un livre</legend>
-        <input type="hidden" name="edit_type" value="add">
+        <input type="hidden" name="edit_type" value="edit">
+        <label for="id">Id du livre</label>
+        <input type="number" name="id" id="id" <?php if (isset($search_id)) echo "value='$search_id'"; ?>>
         <label for="name">Nom du livre</label>
         <input type="text" id="name" name="name"
                placeholder="Nom du livre" <?php if (isset($search_name)) echo "value='$search_name'" ?>>

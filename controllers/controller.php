@@ -30,7 +30,23 @@ function displayEdit(): void
                 $result = "Erreur lors de l'ajout";
             }
         } else if ($_POST['edit_type'] == "edit") {
-            echo "C'est pour modifier";
+            $query = "UPDATE `books` SET `name` = :name, `author` = :author, `year` = :year, `summary` = :summary WHERE `id` = :id";
+            $update = $pdo->prepare($query);
+
+            $update->execute([
+                "name" => $_POST['name'],
+                "author" => $_POST['author'],
+                "year" => $_POST['year'],
+                "summary" => $_POST['summary'],
+                "id" => $_POST['id']
+            ]);
+            if ($update->rowCount() > 0) {
+                $result_type = "success";
+                $result = "Livre modifié";
+            } else {
+                $result_type = "error";
+                $result = "Erreur lors de la modification";
+            }
         } else if ($_POST['edit_type'] == "search") {
             $query = "SELECT * FROM `books` WHERE `id` LIKE :id";
             $search = $pdo->prepare($query);
@@ -41,6 +57,8 @@ function displayEdit(): void
             if ($search->rowCount() > 0) {
                 $result_type = "success";
                 $result = "Livre recherché avec succès";
+                var_dump($search_result);
+                $search_id = $search_result['id'];
                 $search_name = $search_result['name'];
                 $search_author = $search_result['author'];
                 $search_year = $search_result['year'];
